@@ -9,8 +9,7 @@ class City(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
     country = Column(String)
-
-    temperatures = relationship("Temperature", back_populates="city")
+    temperatures = relationship("Temperature", back_populates="city", cascade="all, delete")
 
 
 class Temperature(Base):
@@ -18,10 +17,7 @@ class Temperature(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     value = Column(Float)
-    unit = Column(String)
+    unit = Column(String, nullable=False)
     city_id = Column(Integer, ForeignKey("cities.id"))
 
     city = relationship("City", back_populates="temperatures")
-
-
-City.temperatures = relationship("Temperature", back_populates="city", cascade="all, delete")

@@ -56,6 +56,7 @@ def update_temperature(db: Session, temperature_id: int, temperature: schemas.Te
     db_temperature = db.query(models.Temperature).filter(models.Temperature.id == temperature_id).first()
     if db_temperature:
         db_temperature.value = temperature.value
+        db_temperature.unit = temperature.unit
         db.commit()
         db.refresh(db_temperature)
     return db_temperature

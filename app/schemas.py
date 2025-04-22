@@ -33,4 +33,4 @@ class City(CityBase):
     temperatures: List[Temperature] = []
 
     class Config:
-        from_attributes = True
+        orm_mode = True
